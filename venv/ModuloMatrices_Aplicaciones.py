@@ -44,7 +44,7 @@ def transpuesta(matriz):
     return t
 
 def leerSolucion(solucion):
-    solucion = solucion[:-1]
+    solucion = solucion[1:-2]
     datos = solucion.split(",")
     matsol = []
     for i in range(len(datos)):

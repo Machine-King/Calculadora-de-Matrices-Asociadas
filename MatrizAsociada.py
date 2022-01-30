@@ -44,7 +44,7 @@ for fila in range(len(matrizAsociada)):
     for col in range(len(matrizAsociada[0])):
         matrizAsociada[fila][col] = int(eval(matrizAsociada[fila][col]))
 
-x, y, z, k = symbols("x, y, z, k")
+x, y, z, t = symbols("x, y, z, t")
 if dim_base2 == 0:
     parametros = []
 elif dim_base2 == 1:
@@ -54,7 +54,7 @@ elif dim_base2 == 2:
 elif dim_base2 == 3:
     parametros = [x, y, z]
 elif dim_base2 == 4:
-    parametros = [x, y, z, k]
+    parametros = [x, y, z, t]
 else:
     sys.exit("No se adminte (sub)espacio de llegada W de dimension mayor a 4")
 
@@ -62,8 +62,8 @@ matrizSol = []
 A = Matrix(base2)
 for fil in range(len(matrizAsociada)):
     b = Matrix(matrizAsociada[fil])
-    solucion = iter(linsolve((A, b), parametros))
-    solucion = str(next(solucion))
+    solucion = linsolve((A, b), parametros)
+    solucion = str(solucion)
     solucion = leerSolucion(solucion)
     matrizSol.append(solucion)
 
