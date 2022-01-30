@@ -68,11 +68,12 @@ for fil in range(len(matrizAsociada)):
     matrizSol.append(solucion)
 
 matrizAsociada = transpuesta(matrizSol)
+
 print("\nLa matriz asociada calculada es:")
-print("+" + "------------+"*(len(matrizAsociada)))
+print("+" + "------------+"*(len(matrizAsociada[0])))
 for fila in range(len(matrizAsociada)):
     print("|", end="")
     for col in range(len(matrizAsociada[0])):
         cadena = matrizAsociada[fila][col]
         print(cadena.center(12, " "), end="|")
-    print("\n+" + "------------+"*(len(matrizAsociada)))
+    print("\n+" + "------------+"*(len(matrizAsociada[0])))
