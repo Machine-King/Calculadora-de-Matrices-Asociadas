@@ -1,3 +1,5 @@
+# -*- coding: iso-8859-15 -*-
+#
 # VERSION 1.0 (28-Enero-2022)
 #
 # PACKAGES usados:
@@ -14,12 +16,12 @@ from sympy import *
 
 print("**Bienvenido a Calculadora Avanzada de Matrices Asociadas**")
 print("\nFormato introduccion de datos: ")
-print("\t-Aplicación lineal: Cada elemento del espacio de partida y de llegada se separa con una coma (sin espacios)")
+print("\t-Aplicacion lineal: Cada elemento del espacio de partida y de llegada se separa con una coma (sin espacios)")
 print("\t Ejemplo: (x,y,z) -> (x+2*y+z,y,z)\n")
 print("\t-Bases: Cada vector de una base se separa con espacios y los elementos de cada vector mediante comas)")
 print("\t Ejemplo: {(1,2,3) (1,0,0) (0,0,1)}\n")
 
-aplicacion = input("Introduce la aplicación f : ")
+aplicacion = input("Introduce la aplicacion f : ")
 base1 = input("Introduce una base del (sub)espacio vectorial de partida V : ")
 base2 = input("Introduce una base del (sub)espacio vectorial de llegada W : ")
 datosApl = leerAplicacionLineal(aplicacion)
@@ -54,11 +56,10 @@ elif dim_base2 == 3:
 elif dim_base2 == 4:
     parametros = [x, y, z, k]
 else:
-    sys.exit("No se adminte (sub)espacio de llegada W de dimensión mayor a 4")
+    sys.exit("No se adminte (sub)espacio de llegada W de dimension mayor a 4")
 
 matrizSol = []
 A = Matrix(base2)
-print("\n")
 for fil in range(len(matrizAsociada)):
     b = Matrix(matrizAsociada[fil])
     solucion = iter(linsolve((A, b), parametros))
@@ -67,6 +68,11 @@ for fil in range(len(matrizAsociada)):
     matrizSol.append(solucion)
 
 matrizAsociada = transpuesta(matrizSol)
-print("La matriz asociada calculada es:\n")
+print("\nLa matriz asociada calculada es:")
+print("+" + "------------+"*(len(matrizAsociada)))
 for fila in range(len(matrizAsociada)):
-    print(matrizAsociada[fila])
+    print("|", end="")
+    for col in range(len(matrizAsociada[0])):
+        cadena = matrizAsociada[fila][col]
+        print(cadena.center(12, " "), end="|")
+    print("\n+" + "------------+"*(len(matrizAsociada)))
