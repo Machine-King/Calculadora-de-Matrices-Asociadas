@@ -1,6 +1,6 @@
 # -*- coding: iso-8859-15 -*-
 #
-# VERSION 1.0 (28-Enero-2022)
+# VERSION 1.1 (28-Enero-2022)
 #
 # AYUDA del módulo 'modulomatrizasociada'. Define 4 funciones,
 # que podemos utilizar de la siguiente forma:
@@ -10,10 +10,12 @@
 #
 # - Base = leerBase(base). Lee la base indicada y devuelve esa misma base en una lista
 #
-# - transpuesta(matriz): Lee la matriz y calcula su transpuesta
-#
 # - leerSolucion(solucion): Lee la solucion con el formato (num1, num2, num3, ...)
 #   y crea su correspondiente lista
+#
+# - transpuesta(matriz): Lee la matriz y calcula su transpuesta
+#
+# - getFormat
 
 from fractions import Fraction
 
@@ -50,22 +52,13 @@ def transpuesta(matriz):
     return t
 
 
-def leerSolucion(solucion):
+def getFormat(solucion):
     solucion = solucion[1:-2]
     datos = solucion.split(",")
     matsol = []
     for i in range(len(datos)):
-        unaSol = datos[i][1:]
-        matsol.append(unaSol)
+        unasol = datos[i][1:]
+        matsol.append(unasol)
+    for elm in range(len(matsol)):
+        matsol[elm] = str(Fraction(matsol[elm]).limit_denominator())
     return matsol
-
-def getFormat(solucion):
-    for elm in range(len(solucion)):
-        if solucion[elm].isnumeric() and int(float(solucion[elm])) == float(solucion[elm]):
-            for i in range(len(solucion[elm])):
-                if solucion[elm][i] == ".":
-                    solucion[elm] = solucion[elm][:-2]
-                    break
-        else:
-            solucion[elm] = str(Fraction(solucion[elm]).limit_denominator())
-    return solucion

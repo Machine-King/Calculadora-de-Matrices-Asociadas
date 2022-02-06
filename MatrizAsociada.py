@@ -1,11 +1,13 @@
 # -*- coding: iso-8859-15 -*-
 #
-# VERSION 1.0 (28-Enero-2022)
+# VERSION 1.1 (6-Febrero-2022)
 #
 # PACKAGES usados:
 #   -sympy 1.9
+#   -sys
+#   -Fraction
 # RESOURCES usados:
-#   -ModuloMatrices_Aolicaciones.py
+#   -ModuloMatrices_Aplicaciones.py
 # AYUDA del programa MatrizAsociada.p:
 #
 # El formato a utilizar viene dado al principio. Es IMPORTANTE respetar los espacios para evitar errores
@@ -33,21 +35,17 @@ matrizAsociada = []
 dim_base1 = len(base1)
 dim_base2 = len(base2)
 
-for i in range(len(Esp1)):
+for i in range(len(base1)):
     aux = Esp2 + []
-    for k in range(len(base1[0])):
+    for k in range(len(Esp1)):
         for j in range(len(Esp2)):
             aux[j] = aux[j].replace(Esp1[k], base1[i][k])
+    for ecuacion in range(len(aux)):
+        aux[ecuacion] = eval(aux[ecuacion])
     matrizAsociada.append(aux)
 
-for fila in range(len(matrizAsociada)):
-    for col in range(len(matrizAsociada[0])):
-        matrizAsociada[fila][col] = eval(matrizAsociada[fila][col])
-
 x, y, z, t = symbols("x, y, z, t")
-if dim_base2 == 0:
-    parametros = []
-elif dim_base2 == 1:
+if dim_base2 == 1:
     parametros = [x]
 elif dim_base2 == 2:
     parametros = [x, y]
@@ -62,9 +60,7 @@ matrizSol = []
 A = Matrix(base2)
 for fil in range(len(matrizAsociada)):
     b = Matrix(matrizAsociada[fil])
-    solucion = linsolve((A, b), parametros)
-    solucion = str(solucion)
-    solucion = getFormat(leerSolucion(solucion))
+    solucion = getFormat(str(linsolve((A, b), parametros)))
     matrizSol.append(solucion)
 
 matrizAsociada = transpuesta(matrizSol)
