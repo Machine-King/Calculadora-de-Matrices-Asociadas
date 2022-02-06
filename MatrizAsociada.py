@@ -65,6 +65,7 @@ for fil in range(len(matrizAsociada)):
 
 matrizAsociada = transpuesta(matrizSol)
 
+
 print("\nLa matriz asociada calculada es:")
 print("+" + "------------+"*(len(matrizAsociada[0])))
 for fila in range(len(matrizAsociada)):

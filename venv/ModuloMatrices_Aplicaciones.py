@@ -52,6 +52,7 @@ def transpuesta(matriz):
     return t
 
 
+
 def getFormat(solucion):
     solucion = solucion[1:-2]
     datos = solucion.split(",")
