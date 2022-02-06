@@ -12,7 +12,7 @@
 
 import sys
 from ModuloMatrices_Aplicaciones import *
-from sympy import *
+from sympy import symbols, linsolve, Matrix
 
 print("**Bienvenido a Calculadora Avanzada de Matrices Asociadas**")
 print("\nFormato introduccion de datos: ")
@@ -37,12 +37,12 @@ for i in range(len(Esp1)):
     aux = Esp2 + []
     for k in range(len(base1[0])):
         for j in range(len(Esp2)):
-            aux[j] = aux[j].replace(Esp1[k], str(base1[i][k]))
+            aux[j] = aux[j].replace(Esp1[k], base1[i][k])
     matrizAsociada.append(aux)
 
 for fila in range(len(matrizAsociada)):
     for col in range(len(matrizAsociada[0])):
-        matrizAsociada[fila][col] = int(eval(matrizAsociada[fila][col]))
+        matrizAsociada[fila][col] = eval(matrizAsociada[fila][col])
 
 x, y, z, t = symbols("x, y, z, t")
 if dim_base2 == 0:
@@ -64,7 +64,7 @@ for fil in range(len(matrizAsociada)):
     b = Matrix(matrizAsociada[fil])
     solucion = linsolve((A, b), parametros)
     solucion = str(solucion)
-    solucion = leerSolucion(solucion)
+    solucion = getFormat(leerSolucion(solucion))
     matrizSol.append(solucion)
 
 matrizAsociada = transpuesta(matrizSol)

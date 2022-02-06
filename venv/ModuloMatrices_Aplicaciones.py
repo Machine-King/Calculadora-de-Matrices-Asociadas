@@ -15,6 +15,9 @@
 # - leerSolucion(solucion): Lee la solucion con el formato (num1, num2, num3, ...)
 #   y crea su correspondiente lista
 
+from fractions import Fraction
+
+
 def leerAplicacionLineal(aplicacion):
     datosApl = aplicacion.split()
     datosApl[0] = datosApl[0][1:-1]
@@ -22,6 +25,7 @@ def leerAplicacionLineal(aplicacion):
     Esp1 = datosApl[0].split(",")
     Esp2 = datosApl[2].split(",")
     return [Esp1, Esp2]
+
 
 def leerBase(base):
     lista = []
@@ -31,9 +35,11 @@ def leerBase(base):
         base[i] = base[i][1:-1]
         vector = base[i].split(",")
         for j in range(len(vector)):
-            vector[j] = int(vector[j])
+            if not vector[j].isnumeric():
+                vector[j] = "(" + str(vector[j]) + ")"
         lista.append(vector)
     return lista
+
 
 def transpuesta(matriz):
     t = []
@@ -43,6 +49,7 @@ def transpuesta(matriz):
             t[i].append(matriz[j][i])
     return t
 
+
 def leerSolucion(solucion):
     solucion = solucion[1:-2]
     datos = solucion.split(",")
@@ -51,3 +58,14 @@ def leerSolucion(solucion):
         unaSol = datos[i][1:]
         matsol.append(unaSol)
     return matsol
+
+def getFormat(solucion):
+    for elm in range(len(solucion)):
+        if solucion[elm].isnumeric() and int(float(solucion[elm])) == float(solucion[elm]):
+            for i in range(len(solucion[elm])):
+                if solucion[elm][i] == ".":
+                    solucion[elm] = solucion[elm][:-2]
+                    break
+        else:
+            solucion[elm] = str(Fraction(solucion[elm]).limit_denominator())
+    return solucion
