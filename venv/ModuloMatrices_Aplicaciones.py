@@ -51,8 +51,6 @@ def transpuesta(matriz):
             t[i].append(matriz[j][i])
     return t
 
-
-
 def getFormat(solucion):
     solucion = solucion[1:-2]
     datos = solucion.split(",")

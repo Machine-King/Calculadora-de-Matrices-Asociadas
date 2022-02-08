@@ -41,7 +41,7 @@ for i in range(len(base1)):
         for j in range(len(Esp2)):
             aux[j] = aux[j].replace(Esp1[k], base1[i][k])
     for ecuacion in range(len(aux)):
-        aux[ecuacion] = eval(aux[ecuacion])
+        aux[ecuacion] = str(eval(aux[ecuacion]))
     matrizAsociada.append(aux)
 
 x, y, z, t = symbols("x, y, z, t")
